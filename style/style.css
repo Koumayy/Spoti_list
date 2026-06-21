@@ -1,1 +1,28 @@
+:root {
+  --marill-blue: #2f7bf5;
+  --marill-green: #4cae50;
+}
 
+body {
+  background-color: #f5f6f8;
+}
+
+/* En-tête */
+.app-header {
+  background-color: var(--marill-blue);
+}
+
+/* En-têtes de cartes colorés (façon maquette) */
+.card-header-blue {
+  background-color: var(--marill-blue);
+}
+
+.card-header-green {
+  background-color: var(--marill-green);
+}
+
+/* Barre de recherche dans l'en-tête de carte */
+.search-box {
+  max-width: 260px;
+  width: 100%;
+}
