@@ -10,6 +10,13 @@ const state = {
 let artistsChart = null;
 let genresChart = null;
 
+// Réglages Chart.js pour le thème sombre
+if (window.Chart) {
+  Chart.defaults.color = "#9396a3";
+  Chart.defaults.borderColor = "rgba(255, 255, 255, 0.09)";
+  Chart.defaults.font.family = "'Space Mono', monospace";
+}
+
 // Raccourcis DOM
 const tracksBody = document.getElementById("tracks-body");
 const rowTemplate = document.getElementById("track-row-template");
@@ -113,7 +120,7 @@ function renderArtistsChart(tracks) {
     data: {
       labels: top.map((e) => e.label),
       datasets: [
-        { label: "Nombre de morceaux", data: top.map((e) => e.value), backgroundColor: "#6ea8fe" },
+        { label: "Nombre de morceaux", data: top.map((e) => e.value), backgroundColor: "#5b86ff", borderRadius: 4 },
       ],
     },
     options: {
@@ -136,9 +143,10 @@ function renderGenresChart(tracks) {
   const entries = topEntries(counts, 12);
   fillChartDescription("genres-chart-desc", entries, "morceau(x)");
 
+  // Palette froide (Y2K) : bleus, cyans, violets, argentés
   const palette = [
-    "#f48fb1", "#90caf9", "#ffe082", "#a5d6a7", "#ce93d8", "#ffab91",
-    "#80deea", "#bcaaa4", "#e6ee9c", "#b0bec5", "#9fa8da", "#f8bbd0",
+    "#8ab0ff", "#5b86ff", "#7dd7f0", "#9b8cff", "#c0c8e8", "#5fc9d6",
+    "#6f7bd1", "#a7b6ff", "#4fb0c9", "#b9a7ff", "#8fa0c4", "#6ad0e8",
   ];
 
   if (genresChart) genresChart.destroy();
@@ -150,6 +158,8 @@ function renderGenresChart(tracks) {
         {
           data: entries.map((e) => e.value),
           backgroundColor: entries.map((_, i) => palette[i % palette.length]),
+          borderColor: "#0a0a0d",
+          borderWidth: 2,
         },
       ],
     },
