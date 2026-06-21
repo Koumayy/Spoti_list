@@ -27,6 +27,14 @@
 
   <main class="container my-4">
 
+    <!-- Sélecteur de playlists -->
+    <section class="mb-4" aria-label="Choix de la playlist">
+      <h2 class="h6 fw-semibold text-secondary mb-2">Playlists</h2>
+      <div class="d-flex gap-3 overflow-auto pb-2" id="playlist-list" role="tablist">
+        <!-- Les cartes de playlists seront générées dynamiquement -->
+      </div>
+    </section>
+
     <!-- Graphiques -->
     <section class="row g-4 mb-4" aria-label="Graphiques statistiques">
       <div class="col-12 col-lg-6">
@@ -107,8 +115,7 @@
             <div class="col-12 col-md-5 text-center">
               <img id="modal-cover" src="" alt="" class="img-fluid rounded shadow-sm mb-3 modal-cover">
               <h3 class="h6 mb-1" id="modal-album"></h3>
-              <p class="small text-muted mb-2" id="modal-album-meta"></p>
-              <span class="badge bg-success" id="modal-album-popularity"></span>
+              <p class="small text-muted mb-0" id="modal-album-meta"></p>
             </div>
 
             <!-- Colonne droite : morceau -->
@@ -141,17 +148,17 @@
                   </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                  <span>Numéro de piste</span>
-                  <span id="modal-track-number"></span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                   <span>Explicit</span>
                   <span id="modal-explicit"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  <span>Label</span>
+                  <span class="text-end" id="modal-label"></span>
                 </li>
               </ul>
 
               <p class="fw-semibold text-secondary mb-2">Artistes</p>
-              <ul class="list-unstyled mb-3" id="modal-artists"></ul>
+              <div id="modal-artists" class="d-flex flex-wrap gap-2 mb-3"></div>
 
               <p class="fw-semibold text-secondary mb-2">Genres</p>
               <div id="modal-genres" class="d-flex flex-wrap gap-2"></div>
@@ -169,15 +176,13 @@
     </div>
   </div>
 
-  <!-- Template d'un artiste dans le modal (élément répétitif) -->
-  <template id="artist-item-template">
-    <li class="d-flex align-items-center gap-2 mb-2">
-      <img class="artist-avatar rounded-circle" src="" alt="" width="40" height="40">
-      <div>
-        <div class="fw-semibold artist-name"></div>
-        <div class="small text-muted artist-meta"></div>
-      </div>
-    </li>
+  <!-- Template d'une carte de playlist (élément répétitif) -->
+  <template id="playlist-card-template">
+    <button type="button" class="playlist-card btn p-0 border-0 bg-transparent text-start" role="tab" aria-selected="false">
+      <img class="playlist-cover rounded shadow-sm" src="" alt="">
+      <div class="playlist-name fw-semibold mt-1"></div>
+      <div class="playlist-count small text-muted"></div>
+    </button>
   </template>
 
   <!-- Template d'une ligne de morceau (élément répétitif) -->

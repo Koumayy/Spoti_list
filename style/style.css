@@ -45,16 +45,35 @@ body {
   width: 100%;
 }
 
-/* Avatar d'artiste dans le modal */
-.artist-avatar {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
 /* Barre de popularité du morceau */
 .modal-pop-bar {
   width: 90px;
   height: 8px;
+}
+
+/* Sélecteur de playlists */
+.playlist-card {
+  flex: 0 0 auto;
+  width: 130px;
+  transition: transform 0.15s ease;
+}
+
+.playlist-card:hover,
+.playlist-card:focus-visible {
+  transform: translateY(-4px);
+}
+
+.playlist-cover {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+}
+
+.playlist-card.active .playlist-cover {
+  outline: 3px solid var(--brand-blue);
+  outline-offset: 2px;
+}
+
+.playlist-card.active .playlist-name {
+  color: var(--brand-blue);
 }

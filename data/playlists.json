@@ -1,0 +1,37 @@
+[
+  {
+    "id": "apollo",
+    "name": "Apollo",
+    "cover": "data/covers/Apollo.jpg",
+    "file": "data/playlists/apollo.json",
+    "count": 44
+  },
+  {
+    "id": "ares",
+    "name": "Ares",
+    "cover": "data/covers/Ares.jpg",
+    "file": "data/playlists/ares.json",
+    "count": 199
+  },
+  {
+    "id": "nautaria",
+    "name": "Nautaria",
+    "cover": "data/covers/Nautaria.jpg",
+    "file": "data/playlists/nautaria.json",
+    "count": 88
+  },
+  {
+    "id": "nikke",
+    "name": "Nikke",
+    "cover": "data/covers/Nikke.jpg",
+    "file": "data/playlists/nikke.json",
+    "count": 114
+  },
+  {
+    "id": "skadi",
+    "name": "Skadi",
+    "cover": "data/covers/Skadi.jpg",
+    "file": "data/playlists/skadi.json",
+    "count": 226
+  }
+]
