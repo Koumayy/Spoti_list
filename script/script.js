@@ -126,6 +126,7 @@ function renderArtistsChart(tracks) {
     options: {
       indexAxis: "y",
       responsive: true,
+      maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: { x: { beginAtZero: true, ticks: { precision: 0 } } },
     },
@@ -163,7 +164,11 @@ function renderGenresChart(tracks) {
         },
       ],
     },
-    options: { responsive: true, plugins: { legend: { position: "right" } } },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: "right" } },
+    },
   });
 }
 

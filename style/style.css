@@ -119,6 +119,12 @@ body {
   padding: 1.25rem;
 }
 
+/* Zone de graphique à hauteur fixe (équilibre barres / camembert) */
+.chart-box {
+  position: relative;
+  height: 300px;
+}
+
 /* --- Sélecteur de playlists --------------------------------------------- */
 
 .playlist-card {
