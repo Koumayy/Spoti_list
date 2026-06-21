@@ -1,79 +1,358 @@
+/* ==========================================================================
+   Spoti_list — thème sombre « Y2K / sigilisme » minimaliste
+   ========================================================================== */
+
 :root {
-  /* Bleus/verts assombris pour respecter le contraste WCAG AA (>= 4.5:1
-     avec du texte blanc), tout en restant proches de la maquette. */
-  --brand-blue: #1a66d6;
-  --brand-green: #2e7d32;
+  --bg: #0a0a0d;
+  --surface: #121217;
+  --surface-2: #17171e;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text: #ecedf2;
+  --text-muted: #9396a3;
+  --accent: #8ab0ff;          /* bleu électrique froid */
+  --accent-strong: #5b86ff;
+  --accent-glow: rgba(123, 162, 255, 0.45);
+
+  /* Surcharges des tokens Bootstrap (thème sombre) */
+  --bs-body-bg: var(--bg);
+  --bs-body-color: var(--text);
+  --bs-border-color: var(--border);
+  --bs-secondary-color: var(--text-muted);
+  --bs-emphasis-color: var(--text);
 }
+
+/* --- Base ---------------------------------------------------------------- */
 
 body {
-  background-color: #f5f6f8;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  /* Grille discrète + halo froid en fond (esthétique Y2K) */
+  background-image:
+    radial-gradient(1200px 600px at 50% -10%, rgba(91, 134, 255, 0.10), transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 100% 100%, 38px 38px, 38px 38px;
+  background-attachment: fixed;
 }
 
-/* Boutons "Détails" alignés sur le bleu de la marque (contraste AA) */
-.btn-primary {
-  --bs-btn-bg: var(--brand-blue);
-  --bs-btn-border-color: var(--brand-blue);
-  --bs-btn-hover-bg: #155bbd;
-  --bs-btn-hover-border-color: #155bbd;
-  --bs-btn-active-bg: #124fa3;
-  --bs-btn-active-border-color: #124fa3;
+::selection {
+  background: var(--accent-glow);
+  color: #fff;
 }
 
-/* En-tête */
+/* --- En-tête ------------------------------------------------------------- */
+
 .app-header {
-  background-color: var(--brand-blue);
+  padding: 4.5rem 1rem 3.25rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
 }
 
-/* En-têtes de cartes colorés (façon maquette) */
-.card-header-blue {
-  background-color: var(--brand-blue);
+.sigil-row {
+  font-size: 1.05rem;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+  text-shadow: 0 0 14px var(--accent-glow);
 }
 
-.card-header-green {
-  background-color: var(--brand-green);
+.app-title {
+  font-weight: 700;
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  margin: 0;
+  background: linear-gradient(180deg, #ffffff 0%, #b9c6ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 36px rgba(123, 162, 255, 0.25);
 }
 
-/* Barre de recherche dans l'en-tête de carte */
+.app-subtitle {
+  font-family: "Space Mono", monospace;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+/* --- Titres de section --------------------------------------------------- */
+
+.section-title,
+.panel-title {
+  font-family: "Space Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+}
+
+.section-title::before,
+.panel-title::before {
+  content: "✦ ";
+  color: var(--accent);
+}
+
+/* --- Cartes / panneaux --------------------------------------------------- */
+
+.panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset,
+              0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.panel > .card-header {
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+}
+
+.panel > .card-header .panel-title {
+  margin: 0;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+/* --- Sélecteur de playlists --------------------------------------------- */
+
+.playlist-card {
+  flex: 0 0 auto;
+  width: 138px;
+  transition: transform 0.18s ease;
+}
+
+.playlist-cover-wrap {
+  position: relative;
+  display: block;
+}
+
+.playlist-cover {
+  width: 138px;
+  height: 138px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  filter: grayscale(0.25) contrast(1.05);
+  transition: filter 0.18s ease, box-shadow 0.18s ease;
+}
+
+.playlist-sigil {
+  position: absolute;
+  top: 6px;
+  right: 9px;
+  color: #fff;
+  opacity: 0.65;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+  font-size: 0.85rem;
+}
+
+.playlist-name {
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.playlist-count {
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.playlist-card:hover,
+.playlist-card:focus-visible {
+  transform: translateY(-5px);
+  outline: none;
+}
+
+.playlist-card:hover .playlist-cover,
+.playlist-card:focus-visible .playlist-cover {
+  filter: grayscale(0) contrast(1.05);
+  box-shadow: 0 0 0 1px var(--accent), 0 10px 28px rgba(0, 0, 0, 0.5);
+}
+
+.playlist-card.active .playlist-cover {
+  filter: grayscale(0) contrast(1.05);
+  box-shadow: 0 0 0 2px var(--accent), 0 0 24px var(--accent-glow);
+}
+
+.playlist-card.active .playlist-name {
+  color: var(--accent);
+}
+
+/* --- Tableau ------------------------------------------------------------- */
+
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text);
+  --bs-table-border-color: var(--border);
+  --bs-table-hover-bg: rgba(123, 162, 255, 0.07);
+  --bs-table-hover-color: var(--text);
+  margin: 0;
+}
+
+.table > thead th {
+  font-family: "Space Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-strong);
+  padding: 0.85rem 1.25rem;
+}
+
+.table > tbody td,
+.table > tbody th {
+  padding: 0.75rem 1.25rem;
+  border-color: var(--border);
+}
+
+.track-title {
+  color: var(--text);
+}
+
+.track-artist,
+.track-album {
+  color: var(--text-muted);
+}
+
+/* --- Boutons ------------------------------------------------------------- */
+
+.btn-details {
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  transition: all 0.15s ease;
+}
+
+.btn-details:hover,
+.btn-details:focus-visible {
+  color: #fff;
+  border-color: var(--accent);
+  background: rgba(123, 162, 255, 0.12);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.btn-spotify {
+  background: #1db954;
+  border: none;
+  color: #06210f;
+  font-weight: 600;
+}
+
+.btn-spotify:hover,
+.btn-spotify:focus-visible {
+  background: #1ed760;
+  color: #06210f;
+  box-shadow: 0 0 18px rgba(30, 215, 96, 0.5);
+}
+
+/* Badge "Durée" en accent froid */
+.text-bg-primary {
+  background-color: var(--accent-strong) !important;
+  color: #060912 !important;
+}
+
+/* --- Recherche ----------------------------------------------------------- */
+
 .search-box {
   max-width: 260px;
   width: 100%;
 }
 
-/* Pochette d'album dans le modal */
-.modal-cover {
-  max-width: 220px;
-  width: 100%;
+.form-control {
+  background-color: var(--surface-2);
+  border-color: var(--border-strong);
+  color: var(--text);
 }
 
-/* Barre de popularité du morceau */
+.form-control:focus {
+  background-color: var(--surface-2);
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 0 0 0.2rem rgba(123, 162, 255, 0.2);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+/* --- Modal --------------------------------------------------------------- */
+
+.modal-content {
+  background-color: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+}
+
+.modal-header,
+.modal-footer {
+  border-color: var(--border);
+}
+
+.modal-cover {
+  max-width: 230px;
+  width: 100%;
+  border: 1px solid var(--border);
+}
+
+.list-group-item {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
 .modal-pop-bar {
   width: 90px;
   height: 8px;
+  background-color: var(--surface-2);
 }
 
-/* Sélecteur de playlists */
-.playlist-card {
-  flex: 0 0 auto;
-  width: 130px;
-  transition: transform 0.15s ease;
+.progress-bar {
+  background-color: var(--accent-strong);
 }
 
-.playlist-card:hover,
-.playlist-card:focus-visible {
-  transform: translateY(-4px);
+/* Badges génériques (artistes / genres) */
+#modal-artists .badge {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  font-weight: 500;
 }
 
-.playlist-cover {
-  width: 130px;
-  height: 130px;
-  object-fit: cover;
+#modal-genres .badge {
+  background: rgba(123, 162, 255, 0.12);
+  color: var(--accent);
+  border: 1px solid var(--border-strong);
+  font-weight: 500;
 }
 
-.playlist-card.active .playlist-cover {
-  outline: 3px solid var(--brand-blue);
-  outline-offset: 2px;
+/* --- Pied de page -------------------------------------------------------- */
+
+.app-footer {
+  border-top: 1px solid var(--border);
+  padding: 1.75rem 1rem;
+  margin-top: 3rem;
+  font-family: "Space Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
 }
 
-.playlist-card.active .playlist-name {
-  color: var(--brand-blue);
+/* --- Accessibilité : mouvement réduit ----------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
