@@ -2,7 +2,7 @@
 
 Petit site web qui met en forme un jeu de données musicales issu de Spotify
 (32 morceaux exportés au format JSON).
-
+Lien vers le site: https://koumayy.github.io/Spoti_list/
 ## Fonctionnalités
 
 - **Liste des morceaux** générée dynamiquement depuis `data/tracks.json`
