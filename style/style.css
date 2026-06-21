@@ -26,3 +26,9 @@ body {
   max-width: 260px;
   width: 100%;
 }
+
+/* Pochette d'album dans le modal */
+.modal-cover {
+  max-width: 220px;
+  width: 100%;
+}

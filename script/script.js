@@ -27,8 +27,59 @@ function renderTracks(tracks) {
     row.querySelector(".track-title").textContent = track.name;
     row.querySelector(".track-artist").textContent = getArtistNames(track);
     row.querySelector(".track-album").textContent = track.album?.name ?? "";
+    row.querySelector(".btn-details").dataset.trackId = track.id;
     tracksBody.appendChild(row);
   });
+}
+
+/**
+ * Convertit une durée en millisecondes en format « m:ss ».
+ */
+function formatDuration(ms) {
+  const totalSeconds = Math.round(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = String(totalSeconds % 60).padStart(2, "0");
+  return `${minutes}:${seconds}`;
+}
+
+/**
+ * Choisit une image d'album de taille moyenne (la 2e si disponible).
+ */
+function getCoverUrl(track) {
+  const images = track.album?.images ?? [];
+  return images[1]?.url ?? images[0]?.url ?? "";
+}
+
+/**
+ * Remplit puis ouvre le modal avec les détails d'un morceau.
+ */
+function openTrackModal(track) {
+  const cover = document.getElementById("modal-cover");
+  const coverUrl = getCoverUrl(track);
+  cover.src = coverUrl;
+  cover.alt = coverUrl ? `Pochette de l'album ${track.album?.name ?? ""}` : "";
+
+  document.getElementById("modal-title-value").textContent = track.name;
+  document.getElementById("modal-artists").textContent = getArtistNames(track);
+  document.getElementById("modal-album").textContent = track.album?.name ?? "—";
+  document.getElementById("modal-genres").textContent =
+    getTrackGenres(track).join(", ") || "—";
+  document.getElementById("modal-duration").textContent = formatDuration(track.duration_ms);
+  document.getElementById("modal-release").textContent =
+    track.album?.release_date ?? "—";
+  document.getElementById("modal-popularity").textContent = `${track.popularity} / 100`;
+
+  const previewWrapper = document.getElementById("modal-preview-wrapper");
+  const preview = document.getElementById("modal-preview");
+  if (track.preview_url) {
+    preview.src = track.preview_url;
+    previewWrapper.classList.remove("d-none");
+  } else {
+    preview.removeAttribute("src");
+    previewWrapper.classList.add("d-none");
+  }
+
+  bootstrap.Modal.getOrCreateInstance(document.getElementById("track-modal")).show();
 }
 
 /**
@@ -133,6 +184,14 @@ async function init() {
     renderTracks(state.tracks);
     renderArtistsChart(state.tracks);
     renderGenresChart(state.tracks);
+
+    // Ouverture du modal au clic sur un bouton « Détails »
+    tracksBody.addEventListener("click", (event) => {
+      const button = event.target.closest(".btn-details");
+      if (!button) return;
+      const track = state.tracks.find((t) => t.id === button.dataset.trackId);
+      if (track) openTrackModal(track);
+    });
   } catch (error) {
     console.error("Impossible de charger les morceaux :", error);
     tracksBody.innerHTML =

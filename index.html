@@ -87,6 +87,38 @@
 
   </main>
 
+  <!-- Modal des détails d'un morceau -->
+  <div class="modal fade" id="track-modal" tabindex="-1" aria-labelledby="track-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header card-header-blue text-white">
+          <h2 class="modal-title h5" id="track-modal-title">Détails du morceau</h2>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center mb-3">
+            <img id="modal-cover" src="" alt="" class="img-fluid rounded modal-cover">
+          </div>
+          <dl class="row mb-0">
+            <dt class="col-4">Titre</dt><dd class="col-8" id="modal-title-value"></dd>
+            <dt class="col-4">Artiste(s)</dt><dd class="col-8" id="modal-artists"></dd>
+            <dt class="col-4">Album</dt><dd class="col-8" id="modal-album"></dd>
+            <dt class="col-4">Genre(s)</dt><dd class="col-8" id="modal-genres"></dd>
+            <dt class="col-4">Durée</dt><dd class="col-8" id="modal-duration"></dd>
+            <dt class="col-4">Sortie</dt><dd class="col-8" id="modal-release"></dd>
+            <dt class="col-4">Popularité</dt><dd class="col-8" id="modal-popularity"></dd>
+          </dl>
+          <div id="modal-preview-wrapper" class="mt-3 d-none">
+            <p class="mb-1 fw-semibold">Extrait audio</p>
+            <audio id="modal-preview" controls class="w-100">
+              Votre navigateur ne gère pas la lecture audio.
+            </audio>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Template d'une ligne de morceau (élément répétitif) -->
   <template id="track-row-template">
     <tr>
