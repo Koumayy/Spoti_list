@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mise en forme de données musicales issues de Spotify.">
+  <meta name="description" content="Spoti_list — mise en forme de données musicales issues de Spotify.">
   <title>Spoti_list</title>
+
+  <!-- Polices -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap 5 -->
   <link
@@ -18,29 +23,30 @@
 <body>
 
   <!-- En-tête -->
-  <header class="app-header text-center text-white py-5">
+  <header class="app-header text-center">
     <div class="container">
-      <h1 class="fw-bold display-4 mb-2">Spoti_list</h1>
-      <p class="lead mb-0">les musiques les plus tuff pour pousser du poids</p>
+      <p class="sigil-row mb-2" aria-hidden="true">✦&nbsp;&nbsp;⟡&nbsp;&nbsp;✦</p>
+      <h1 class="app-title mb-2">Spoti_list</h1>
+      <p class="app-subtitle mb-0">les musiques les plus tuff pour pousser du poids</p>
     </div>
   </header>
 
-  <main class="container my-4">
+  <main class="container py-4">
 
     <!-- Sélecteur de playlists -->
-    <section class="mb-4" aria-label="Choix de la playlist">
-      <h2 class="h6 fw-semibold text-secondary mb-2">Playlists</h2>
+    <section class="mb-5" aria-label="Choix de la playlist">
+      <h2 class="section-title">Playlists</h2>
       <div class="d-flex gap-3 overflow-auto pb-2" id="playlist-list" role="tablist">
         <!-- Les cartes de playlists seront générées dynamiquement -->
       </div>
     </section>
 
     <!-- Graphiques -->
-    <section class="row g-4 mb-4" aria-label="Graphiques statistiques">
+    <section class="row g-4 mb-5" aria-label="Graphiques statistiques">
       <div class="col-12 col-lg-6">
-        <div class="card shadow-sm h-100">
-          <div class="card-header card-header-blue text-white">
-            <h2 class="h6 fw-semibold mb-0">Top 10 des Artistes</h2>
+        <div class="card panel h-100">
+          <div class="card-header">
+            <h2 class="panel-title">Top 10 des Artistes</h2>
           </div>
           <div class="card-body">
             <canvas id="artists-chart" role="img"
@@ -52,9 +58,9 @@
       </div>
 
       <div class="col-12 col-lg-6">
-        <div class="card shadow-sm h-100">
-          <div class="card-header card-header-green text-white">
-            <h2 class="h6 fw-semibold mb-0">Distribution des Genres</h2>
+        <div class="card panel h-100">
+          <div class="card-header">
+            <h2 class="panel-title">Distribution des Genres</h2>
           </div>
           <div class="card-body">
             <canvas id="genres-chart" role="img"
@@ -68,9 +74,9 @@
 
     <!-- Liste des morceaux -->
     <section aria-label="Liste des morceaux">
-      <div class="card shadow-sm">
-        <div class="card-header card-header-blue text-white d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
-          <h2 class="h6 fw-semibold mb-0">Liste des Morceaux</h2>
+      <div class="card panel">
+        <div class="card-header d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+          <h2 class="panel-title">Liste des Morceaux</h2>
           <div class="search-box">
             <label for="search" class="visually-hidden">Rechercher un morceau</label>
             <input type="search" id="search" class="form-control form-control-sm"
@@ -99,6 +105,10 @@
     </section>
 
   </main>
+
+  <footer class="app-footer text-center">
+    <p class="mb-0">✦ Spoti_list ✦ <span class="text-muted">— données Spotify, extraits via Deezer</span></p>
+  </footer>
 
   <!-- Modal des détails d'un morceau -->
   <div class="modal fade" id="track-modal" tabindex="-1" aria-labelledby="track-modal-title" aria-hidden="true">
@@ -132,11 +142,11 @@
                 </p>
               </div>
 
-              <p class="fw-semibold text-secondary mb-2">Informations sur le morceau</p>
+              <p class="panel-title mb-2">Informations sur le morceau</p>
               <ul class="list-group list-group-flush mb-3">
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                   <span>Durée</span>
-                  <span class="badge bg-primary" id="modal-duration"></span>
+                  <span class="badge text-bg-primary" id="modal-duration"></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                   <span>Popularité</span>
@@ -157,20 +167,20 @@
                 </li>
               </ul>
 
-              <p class="fw-semibold text-secondary mb-2">Artistes</p>
+              <p class="panel-title mb-2">Artistes</p>
               <div id="modal-artists" class="d-flex flex-wrap gap-2 mb-3"></div>
 
-              <p class="fw-semibold text-secondary mb-2">Genres</p>
+              <p class="panel-title mb-2">Genres</p>
               <div id="modal-genres" class="d-flex flex-wrap gap-2"></div>
             </div>
 
           </div>
         </div>
         <div class="modal-footer">
-          <a id="modal-spotify" class="btn btn-success" target="_blank" rel="noopener noreferrer" href="#">
+          <a id="modal-spotify" class="btn btn-spotify" target="_blank" rel="noopener noreferrer" href="#">
             <span aria-hidden="true">▶</span> Ouvrir dans Spotify
           </a>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Fermer</button>
         </div>
       </div>
     </div>
@@ -179,9 +189,12 @@
   <!-- Template d'une carte de playlist (élément répétitif) -->
   <template id="playlist-card-template">
     <button type="button" class="playlist-card btn p-0 border-0 bg-transparent text-start" role="tab" aria-selected="false">
-      <img class="playlist-cover rounded shadow-sm" src="" alt="">
-      <div class="playlist-name fw-semibold mt-1"></div>
-      <div class="playlist-count small text-muted"></div>
+      <span class="playlist-cover-wrap">
+        <img class="playlist-cover" src="" alt="">
+        <span class="playlist-sigil" aria-hidden="true">✦</span>
+      </span>
+      <span class="playlist-name d-block mt-2"></span>
+      <span class="playlist-count d-block"></span>
     </button>
   </template>
 
@@ -192,8 +205,8 @@
       <td class="track-artist"></td>
       <td class="track-album"></td>
       <td class="text-end">
-        <button type="button" class="btn btn-sm btn-primary btn-details">
-          <span aria-hidden="true">ℹ</span> Détails
+        <button type="button" class="btn btn-sm btn-details">
+          Détails
         </button>
       </td>
     </tr>
