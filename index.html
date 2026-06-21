@@ -31,24 +31,28 @@
     <section class="row g-4 mb-4" aria-label="Graphiques statistiques">
       <div class="col-12 col-lg-6">
         <div class="card shadow-sm h-100">
-          <div class="card-header card-header-blue text-white fw-semibold">
-            Top 10 des Artistes
+          <div class="card-header card-header-blue text-white">
+            <h2 class="h6 fw-semibold mb-0">Top 10 des Artistes</h2>
           </div>
           <div class="card-body">
             <canvas id="artists-chart" role="img"
-                    aria-label="Graphique en barres du top 10 des artistes par nombre de morceaux"></canvas>
+                    aria-label="Graphique en barres du top 10 des artistes par nombre de morceaux"
+                    aria-describedby="artists-chart-desc"></canvas>
+            <ul id="artists-chart-desc" class="visually-hidden"></ul>
           </div>
         </div>
       </div>
 
       <div class="col-12 col-lg-6">
         <div class="card shadow-sm h-100">
-          <div class="card-header card-header-green text-white fw-semibold">
-            Distribution des Genres
+          <div class="card-header card-header-green text-white">
+            <h2 class="h6 fw-semibold mb-0">Distribution des Genres</h2>
           </div>
           <div class="card-body">
             <canvas id="genres-chart" role="img"
-                    aria-label="Graphique circulaire de la distribution des genres musicaux"></canvas>
+                    aria-label="Graphique circulaire de la distribution des genres musicaux"
+                    aria-describedby="genres-chart-desc"></canvas>
+            <ul id="genres-chart-desc" class="visually-hidden"></ul>
           </div>
         </div>
       </div>
@@ -58,7 +62,7 @@
     <section aria-label="Liste des morceaux">
       <div class="card shadow-sm">
         <div class="card-header card-header-blue text-white d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
-          <span class="fw-semibold">Liste des Morceaux</span>
+          <h2 class="h6 fw-semibold mb-0">Liste des Morceaux</h2>
           <div class="search-box">
             <label for="search" class="visually-hidden">Rechercher un morceau</label>
             <input type="search" id="search" class="form-control form-control-sm"
@@ -68,6 +72,7 @@
         <div class="card-body p-0">
           <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
+              <caption class="visually-hidden">Liste des morceaux avec titre, artiste, album et accès aux détails</caption>
               <thead>
                 <tr>
                   <th scope="col">Titre</th>

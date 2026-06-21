@@ -1,10 +1,22 @@
 :root {
-  --marill-blue: #2f7bf5;
-  --marill-green: #4cae50;
+  /* Bleus/verts assombris pour respecter le contraste WCAG AA (>= 4.5:1
+     avec du texte blanc), tout en restant proches de la maquette. */
+  --marill-blue: #1a66d6;
+  --marill-green: #2e7d32;
 }
 
 body {
   background-color: #f5f6f8;
+}
+
+/* Boutons "Détails" alignés sur le bleu de la marque (contraste AA) */
+.btn-primary {
+  --bs-btn-bg: var(--marill-blue);
+  --bs-btn-border-color: var(--marill-blue);
+  --bs-btn-hover-bg: #155bbd;
+  --bs-btn-hover-border-color: #155bbd;
+  --bs-btn-active-bg: #124fa3;
+  --bs-btn-active-border-color: #124fa3;
 }
 
 /* En-tête */

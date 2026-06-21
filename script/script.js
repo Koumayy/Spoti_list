@@ -27,7 +27,9 @@ function renderTracks(tracks) {
     row.querySelector(".track-title").textContent = track.name;
     row.querySelector(".track-artist").textContent = getArtistNames(track);
     row.querySelector(".track-album").textContent = track.album?.name ?? "";
-    row.querySelector(".btn-details").dataset.trackId = track.id;
+    const button = row.querySelector(".btn-details");
+    button.dataset.trackId = track.id;
+    button.setAttribute("aria-label", `Détails de ${track.name}`);
     tracksBody.appendChild(row);
   });
 }
@@ -106,6 +108,21 @@ function topEntries(counts, n) {
 }
 
 /**
+ * Remplit une liste cachée servant d'alternative textuelle à un graphique
+ * (accessibilité : les données restent lisibles par les lecteurs d'écran).
+ */
+function fillChartDescription(id, entries, unit) {
+  const list = document.getElementById(id);
+  if (!list) return;
+  list.replaceChildren();
+  entries.forEach((e) => {
+    const item = document.createElement("li");
+    item.textContent = `${e.label} : ${e.value} ${unit}`;
+    list.appendChild(item);
+  });
+}
+
+/**
  * Graphique en barres horizontales : top 10 des artistes par nb de morceaux.
  */
 function renderArtistsChart(tracks) {
@@ -116,6 +133,7 @@ function renderArtistsChart(tracks) {
     })
   );
   const top = topEntries(counts, 10);
+  fillChartDescription("artists-chart-desc", top, "morceau(x)");
 
   new Chart(document.getElementById("artists-chart"), {
     type: "bar",
@@ -149,6 +167,7 @@ function renderGenresChart(tracks) {
     })
   );
   const entries = topEntries(counts, 99);
+  fillChartDescription("genres-chart-desc", entries, "morceau(x)");
 
   const palette = [
     "#f48fb1", "#90caf9", "#ffe082", "#a5d6a7", "#ce93d8",
