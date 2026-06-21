@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Mise en forme de données musicales issues de Spotify.">
-  <title>Les musiques du Marill</title>
+  <title>Spoti_list</title>
 
   <!-- Bootstrap 5 -->
   <link
@@ -20,8 +20,8 @@
   <!-- En-tête -->
   <header class="app-header text-center text-white py-5">
     <div class="container">
-      <h1 class="fw-bold display-4 mb-2">les musiques du Marill</h1>
-      <p class="lead mb-0">je n'ai pas d'inspi pour le sous-titre, de toute façon vous savez ce qui va y avoir</p>
+      <h1 class="fw-bold display-4 mb-2">Spoti_list</h1>
+      <p class="lead mb-0">les musiques les plus tuff pour pousser du poids</p>
     </div>
   </header>
 
@@ -94,35 +94,91 @@
 
   <!-- Modal des détails d'un morceau -->
   <div class="modal fade" id="track-modal" tabindex="-1" aria-labelledby="track-modal-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
-        <div class="modal-header card-header-blue text-white">
+        <div class="modal-header">
           <h2 class="modal-title h5" id="track-modal-title">Détails du morceau</h2>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
         </div>
         <div class="modal-body">
-          <div class="text-center mb-3">
-            <img id="modal-cover" src="" alt="" class="img-fluid rounded modal-cover">
+          <div class="row g-4">
+
+            <!-- Colonne gauche : album -->
+            <div class="col-12 col-md-5 text-center">
+              <img id="modal-cover" src="" alt="" class="img-fluid rounded shadow-sm mb-3 modal-cover">
+              <h3 class="h6 mb-1" id="modal-album"></h3>
+              <p class="small text-muted mb-2" id="modal-album-meta"></p>
+              <span class="badge bg-success" id="modal-album-popularity"></span>
+            </div>
+
+            <!-- Colonne droite : morceau -->
+            <div class="col-12 col-md-7">
+              <h3 class="h4 mb-3" id="modal-title-value"></h3>
+
+              <div id="modal-preview-wrapper" class="mb-3">
+                <p class="fw-semibold mb-1">Preview audio</p>
+                <audio id="modal-preview" controls class="w-100">
+                  Votre navigateur ne gère pas la lecture audio.
+                </audio>
+                <p id="modal-preview-unavailable" class="small text-muted mb-0 d-none">
+                  Extrait audio indisponible (lien expiré ou absent).
+                </p>
+              </div>
+
+              <p class="fw-semibold text-secondary mb-2">Informations sur le morceau</p>
+              <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  <span>Durée</span>
+                  <span class="badge bg-primary" id="modal-duration"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  <span>Popularité</span>
+                  <span class="d-flex align-items-center gap-2">
+                    <span class="progress modal-pop-bar" role="img" id="modal-popularity-progress">
+                      <span class="progress-bar" id="modal-popularity-bar"></span>
+                    </span>
+                    <span id="modal-popularity"></span>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  <span>Numéro de piste</span>
+                  <span id="modal-track-number"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  <span>Explicit</span>
+                  <span id="modal-explicit"></span>
+                </li>
+              </ul>
+
+              <p class="fw-semibold text-secondary mb-2">Artistes</p>
+              <ul class="list-unstyled mb-3" id="modal-artists"></ul>
+
+              <p class="fw-semibold text-secondary mb-2">Genres</p>
+              <div id="modal-genres" class="d-flex flex-wrap gap-2"></div>
+            </div>
+
           </div>
-          <dl class="row mb-0">
-            <dt class="col-4">Titre</dt><dd class="col-8" id="modal-title-value"></dd>
-            <dt class="col-4">Artiste(s)</dt><dd class="col-8" id="modal-artists"></dd>
-            <dt class="col-4">Album</dt><dd class="col-8" id="modal-album"></dd>
-            <dt class="col-4">Genre(s)</dt><dd class="col-8" id="modal-genres"></dd>
-            <dt class="col-4">Durée</dt><dd class="col-8" id="modal-duration"></dd>
-            <dt class="col-4">Sortie</dt><dd class="col-8" id="modal-release"></dd>
-            <dt class="col-4">Popularité</dt><dd class="col-8" id="modal-popularity"></dd>
-          </dl>
-          <div id="modal-preview-wrapper" class="mt-3 d-none">
-            <p class="mb-1 fw-semibold">Extrait audio</p>
-            <audio id="modal-preview" controls class="w-100">
-              Votre navigateur ne gère pas la lecture audio.
-            </audio>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <a id="modal-spotify" class="btn btn-success" target="_blank" rel="noopener noreferrer" href="#">
+            <span aria-hidden="true">▶</span> Ouvrir dans Spotify
+          </a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Template d'un artiste dans le modal (élément répétitif) -->
+  <template id="artist-item-template">
+    <li class="d-flex align-items-center gap-2 mb-2">
+      <img class="artist-avatar rounded-circle" src="" alt="" width="40" height="40">
+      <div>
+        <div class="fw-semibold artist-name"></div>
+        <div class="small text-muted artist-meta"></div>
+      </div>
+    </li>
+  </template>
 
   <!-- Template d'une ligne de morceau (élément répétitif) -->
   <template id="track-row-template">

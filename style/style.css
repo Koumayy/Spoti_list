@@ -1,8 +1,8 @@
 :root {
   /* Bleus/verts assombris pour respecter le contraste WCAG AA (>= 4.5:1
      avec du texte blanc), tout en restant proches de la maquette. */
-  --marill-blue: #1a66d6;
-  --marill-green: #2e7d32;
+  --brand-blue: #1a66d6;
+  --brand-green: #2e7d32;
 }
 
 body {
@@ -11,8 +11,8 @@ body {
 
 /* Boutons "Détails" alignés sur le bleu de la marque (contraste AA) */
 .btn-primary {
-  --bs-btn-bg: var(--marill-blue);
-  --bs-btn-border-color: var(--marill-blue);
+  --bs-btn-bg: var(--brand-blue);
+  --bs-btn-border-color: var(--brand-blue);
   --bs-btn-hover-bg: #155bbd;
   --bs-btn-hover-border-color: #155bbd;
   --bs-btn-active-bg: #124fa3;
@@ -21,16 +21,16 @@ body {
 
 /* En-tête */
 .app-header {
-  background-color: var(--marill-blue);
+  background-color: var(--brand-blue);
 }
 
 /* En-têtes de cartes colorés (façon maquette) */
 .card-header-blue {
-  background-color: var(--marill-blue);
+  background-color: var(--brand-blue);
 }
 
 .card-header-green {
-  background-color: var(--marill-green);
+  background-color: var(--brand-green);
 }
 
 /* Barre de recherche dans l'en-tête de carte */
@@ -43,4 +43,18 @@ body {
 .modal-cover {
   max-width: 220px;
   width: 100%;
+}
+
+/* Avatar d'artiste dans le modal */
+.artist-avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Barre de popularité du morceau */
+.modal-pop-bar {
+  width: 90px;
+  height: 8px;
 }
