@@ -85,6 +85,20 @@
 
   </main>
 
+  <!-- Template d'une ligne de morceau (élément répétitif) -->
+  <template id="track-row-template">
+    <tr>
+      <th scope="row" class="track-title fw-normal"></th>
+      <td class="track-artist"></td>
+      <td class="track-album"></td>
+      <td class="text-end">
+        <button type="button" class="btn btn-sm btn-primary btn-details">
+          <span aria-hidden="true">ℹ</span> Détails
+        </button>
+      </td>
+    </tr>
+  </template>
+
   <!-- Bootstrap JS -->
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
