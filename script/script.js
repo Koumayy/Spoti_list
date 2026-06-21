@@ -409,3 +409,15 @@ async function init() {
 }
 
 init();
+
+// --- Écran d'accueil : disparition après l'animation ------------------------
+(function handleIntro() {
+  const intro = document.getElementById("intro");
+  if (!intro) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const visibleFor = reduce ? 400 : 2600;
+  window.addEventListener("load", () => {
+    setTimeout(() => intro.classList.add("is-hidden"), visibleFor);
+    setTimeout(() => intro.remove(), visibleFor + 900);
+  });
+})();

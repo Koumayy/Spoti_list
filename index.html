@@ -9,7 +9,7 @@
   <!-- Polices -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap 5 -->
   <link
@@ -22,16 +22,34 @@
 </head>
 <body>
 
-  <!-- En-tête -->
-  <header class="app-header text-center">
-    <div class="container">
-      <p class="sigil-row mb-2" aria-hidden="true">✦&nbsp;&nbsp;⟡&nbsp;&nbsp;✦</p>
-      <h1 class="app-title mb-2">Spoti_list</h1>
+  <!-- Écran d'accueil animé (intro) -->
+  <div id="intro" aria-hidden="true">
+    <div class="intro-blob b1"></div>
+    <div class="intro-blob b2"></div>
+    <div class="intro-blob b3"></div>
+    <p class="intro-text">hello<span class="intro-sigil"> ✦ </span>spoti_list</p>
+  </div>
+
+  <!-- Hero plein écran -->
+  <header class="hero text-center">
+    <div class="hero-orb" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="sigil-row mb-3" aria-hidden="true">✦&nbsp;&nbsp;⟡&nbsp;&nbsp;✦</p>
+      <h1 class="hero-title mb-3">spoti_list</h1>
       <p class="app-subtitle mb-0">les musiques les plus tuff pour pousser du poids</p>
     </div>
+    <a href="#content" class="scroll-indicator" aria-label="Faire défiler vers le contenu">
+      <svg viewBox="0 0 100 100" class="scroll-ring" aria-hidden="true">
+        <defs>
+          <path id="scroll-path" d="M50,50 m-34,0 a34,34 0 1,1 68,0 a34,34 0 1,1 -68,0"></path>
+        </defs>
+        <text><textPath href="#scroll-path">SCROLL ✦ TO EXPLORE ✦ </textPath></text>
+      </svg>
+      <span class="scroll-arrow" aria-hidden="true">↓</span>
+    </a>
   </header>
 
-  <main class="container py-4">
+  <main class="container py-4" id="content">
 
     <!-- Sélecteur de playlists -->
     <section class="mb-5" aria-label="Choix de la playlist">
