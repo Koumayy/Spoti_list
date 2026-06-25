@@ -10,13 +10,6 @@ const state = {
 let artistsChart = null;
 let genresChart = null;
 
-// Réglages Chart.js pour le thème sombre
-if (window.Chart) {
-  Chart.defaults.color = "#9396a3";
-  Chart.defaults.borderColor = "rgba(255, 255, 255, 0.09)";
-  Chart.defaults.font.family = "'Space Mono', monospace";
-}
-
 // Raccourcis DOM
 const tracksBody = document.getElementById("tracks-body");
 const rowTemplate = document.getElementById("track-row-template");
@@ -120,7 +113,7 @@ function renderArtistsChart(tracks) {
     data: {
       labels: top.map((e) => e.label),
       datasets: [
-        { label: "Nombre de morceaux", data: top.map((e) => e.value), backgroundColor: "#5b86ff", borderRadius: 4 },
+        { label: "Nombre de morceaux", data: top.map((e) => e.value), backgroundColor: "#0d6efd" },
       ],
     },
     options: {
@@ -144,10 +137,9 @@ function renderGenresChart(tracks) {
   const entries = topEntries(counts, 12);
   fillChartDescription("genres-chart-desc", entries, "morceau(x)");
 
-  // Palette froide (Y2K) : bleus, cyans, violets, argentés
   const palette = [
-    "#8ab0ff", "#5b86ff", "#7dd7f0", "#9b8cff", "#c0c8e8", "#5fc9d6",
-    "#6f7bd1", "#a7b6ff", "#4fb0c9", "#b9a7ff", "#8fa0c4", "#6ad0e8",
+    "#0d6efd", "#6f42c1", "#d63384", "#dc3545", "#fd7e14", "#ffc107",
+    "#198754", "#20c997", "#0dcaf0", "#6610f2", "#adb5bd", "#6c757d",
   ];
 
   if (genresChart) genresChart.destroy();
@@ -159,7 +151,7 @@ function renderGenresChart(tracks) {
         {
           data: entries.map((e) => e.value),
           backgroundColor: entries.map((_, i) => palette[i % palette.length]),
-          borderColor: "#0a0a0d",
+          borderColor: "#fff",
           borderWidth: 2,
         },
       ],
@@ -409,15 +401,3 @@ async function init() {
 }
 
 init();
-
-// --- Écran d'accueil : disparition après l'animation ------------------------
-(function handleIntro() {
-  const intro = document.getElementById("intro");
-  if (!intro) return;
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const visibleFor = reduce ? 400 : 2600;
-  window.addEventListener("load", () => {
-    setTimeout(() => intro.classList.add("is-hidden"), visibleFor);
-    setTimeout(() => intro.remove(), visibleFor + 900);
-  });
-})();
